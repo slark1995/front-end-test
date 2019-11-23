@@ -24,7 +24,7 @@ img{
     font-weight: 500;
 }
 
-.group{
+.group,.price{
     margin: 0.2vmin;
 }
 

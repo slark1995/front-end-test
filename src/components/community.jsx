@@ -5,10 +5,8 @@ import Img from './img.jsx'
 //This component is every community item in Community List
 export default class Community extends React.Component {
     render(){
-        const name = this.props.name;
-        const image = this.props.image;
-        const group = this.props.group;
-        const avg = this.props.avg;
+        
+        const { name, image, group, avg } = this.props;
 
         return(
             <div className = "community">

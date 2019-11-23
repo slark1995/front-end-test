@@ -12,22 +12,23 @@ export default class CommunitiesContainer extends React.Component {
     };
   }
 
+  compare = function(prop) {
+    return function(obj1, obj2) {
+      var val1 = obj1[prop];
+      var val2 = obj2[prop];
+      if (val1 < val2) {
+        return -1;
+      } else if (val1 > val2) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+  };
+
   fetchData() {
     fetchCommunities().then(data => {
-      let compare = function(prop) {
-        return function(obj1, obj2) {
-          var val1 = obj1[prop];
-          var val2 = obj2[prop];
-          if (val1 < val2) {
-            return -1;
-          } else if (val1 > val2) {
-            return 1;
-          } else {
-            return 0;
-          }
-        };
-      };
-      const sortData = data.sort(compare("name"));
+      const sortData = data.sort(this.compare("name"));
       this.setState({ communities: sortData });
     });
 
@@ -47,7 +48,9 @@ export default class CommunitiesContainer extends React.Component {
           count = count + 1;
         }
       });
-      count !== 0 ? (average = (price / count).toFixed(2)) : (average = "unknown");
+      count !== 0
+        ? (average = (price / count).toFixed(2))
+        : (average = "unknown");
       i["avg"] = average;
     });
   }
@@ -56,10 +59,9 @@ export default class CommunitiesContainer extends React.Component {
     this.fetchData();
   }
 
+  
   render() {
     this.averagePrice();
-
-    //console.log(this.state.communities);
     const communityList = this.state.communities
       .sort()
       .map(i => (
